@@ -1,3 +1,3 @@
 export default function Tour() {
-  return <div>Tour</div>
+  return <div>Tour base</div>
 }

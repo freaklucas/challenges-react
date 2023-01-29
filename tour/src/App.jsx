@@ -1,4 +1,6 @@
 import { useState,useEffect } from 'react';
+import Tours from './components/Tours';
+
 import './App.css'
 
 const URL = 'https://course-api.com/react-tours-project';
@@ -9,10 +11,18 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const fetchTours = async () => {
-    const response = await fetch(URL);
-    const data = await response.json();
+    setLoading(true);
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
 
-    console.log(data);
+      setLoading(false);
+      setTours(data);  
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+    
   }
 
   useEffect(() => {
@@ -27,7 +37,9 @@ function App() {
     )
   }
 
-  return <div>Front</div>
+  return <main>
+    <Tours tours={tours} />
+  </main>
 }
 
 export default App;

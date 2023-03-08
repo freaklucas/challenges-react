@@ -1,14 +1,21 @@
-import { useState,useEffect } from 'react';
-import Tours from './components/Tours';
+import { useState, useEffect } from "react";
+import Tours from "./components/Tours";
+import "./App.css";
 
-import './App.css'
-
-const URL = 'https://course-api.com/react-tours-project';
+const URL = "https://course-api.com/react-tours-project";
 
 function App() {
-
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const removeTour = (id) => {
+    const newTours = tours
+      .filter((tour) => tour.id !== id);
+    
+    setTours(newTours);
+  };
+
+
 
   const fetchTours = async () => {
     setLoading(true);
@@ -17,29 +24,39 @@ function App() {
       const data = await response.json();
 
       setLoading(false);
-      setTours(data);  
+      setTours(data);
     } catch (error) {
       setLoading(false);
       console.log(error);
     }
-    
-  }
+  };
 
   useEffect(() => {
     fetchTours();
   }, []);
 
-  if(loading) {
+  if (loading) {
     return (
       <main>
         <h2>Loading...</h2>
       </main>
-    )
+    );
   }
 
-  return <main>
-    <Tours tours={tours} />
-  </main>
+  if (tours.length === 0) {
+    return (
+      <main>
+        <h2>No data...</h2>
+        <button className="btn" onClick={() => fetchTours()}> refresh</button>
+      </main>
+    );
+  }
+
+  return (
+    <main>
+      <Tours tours={tours} removeTour={removeTour} />
+    </main>
+  );
 }
 
 export default App;

@@ -5,8 +5,8 @@
 
 
 
-
-- [X] 1. Implementar função de toggle em ler mais e ler menos o card
-- [x] 2. Deletar os cards
-- [x] 3. Refresh para buscar novamente os dados na API
+- [X] 1. Buscar dados da api
+- [X] 2. Implementar função de toggle em ler mais e ler menos o card
+- [x] 3. Deletar os cards
+- [x] 4. Refresh para buscar novamente os dados na API
 
